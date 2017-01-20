@@ -9,13 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var meal_model_1 = require('./meal.model');
 var AppComponent = (function () {
     function AppComponent() {
+        this.masterMealList = [
+            new meal_model_1.Meal("Smoothie", "Added protien powder!", 90),
+            new meal_model_1.Meal("Fries", "Didn't have a side of ranch", 300),
+            new meal_model_1.Meal("Snickers", "Only had one", 215)
+        ];
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
-            template: "\n  <div class=\"container\">\n    <h1>My First Angular 2 App</h1>\n  </div>\n   "
+            template: "\n  <div class=\"container\">\n    <meal-list [childMealList]=\"masterMealList\"></meal-list>\n  </div>\n   "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
