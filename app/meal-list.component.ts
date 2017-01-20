@@ -4,7 +4,12 @@ import { Meal } from './meal.model';
 @Component({
   selector: 'meal-list',
   template: `
-  <div class="row meals" *ngFor="let newMeal of childMealList">
+  <select class="dropDown" (change)="onChange($event.target.value)" >
+    <option value="all" selected="selected">All Meals</option>
+    <option value="lowCalories">My low calories meals</option>
+    <option value="highCalories">My high calories meals</option>
+  </select>
+  <div class="row meals" *ngFor="let newMeal of childMealList | calories:filterByCalories ">
     <div class="col m6" >
       {{newMeal.food}}<br>{{newMeal.details}}<br>{{newMeal.calories}}
     </div>
@@ -20,6 +25,12 @@ export class MealListComponent {
   @Output() clickSender = new EventEmitter();
 
   editButtonHasBeenClicked(mealToEdit: Meal) {
-  this.clickSender.emit(mealToEdit);
-}
+    this.clickSender.emit(mealToEdit);
+  }
+
+  filterByCalories: string = "all";
+
+  onChange(optionFromMenu) {
+    this.filterByCalories = optionFromMenu;
+  }
 }
