@@ -5,7 +5,10 @@ import { Meal } from './meal.model';
   selector: 'app-root',
   template: `
   <div class="container">
-    <meal-list [childMealList]="masterMealList"></meal-list>
+    <meal-list [childMealList]="masterMealList" (clickSender)="editMeal($event)"></meal-list>
+    <hr>
+    <edit-meal [childSelectedMeal]="selectedMeal" (doneClickedSender)="editDone()"></edit-meal>
+    <br>
     <button class="btn" (click)="mealFormShow()">Add A New Meal</button>
     <new-meal *ngIf="showMeal" class="newmeal" (newMealSender)="newMeal($event)" (showMealSender)="mealFormHide($event)"></new-meal>
 
@@ -29,5 +32,13 @@ export class AppComponent {
     }
     mealFormHide(mealBool: boolean) {
       this.showMeal = mealBool;
+    }
+
+    selectedMeal = null;
+    editMeal(clickedMeal) {
+      this.selectedMeal = clickedMeal;
+    }
+    editDone() {
+      this.selectedMeal = null;
     }
 }
